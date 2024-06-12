@@ -1,19 +1,31 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {configure} from '@gravity-ui/uikit';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { configure } from '@gravity-ui/uikit';
 
-import App from './App.tsx'
+import App from './App.tsx';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+import './index.css';
 
 configure({
   lang: 'ru',
 });
 
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-import './index.css'
+async function enableMocking() {
+  if (process.env.NODE_ENV !== 'development') {
+    return;
+  }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+  const { serviceWorker } = await import('../mock-server/server.ts');
+
+  return serviceWorker.start();
+}
+
+enableMocking().then(() =>
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  ),
+);
