@@ -72,6 +72,7 @@ export const ProductCardPage = () => {
             <Stack>
               {prompts.map((prompt, idx) => (
                 <Prompt
+                  key={prompt + idx}
                   loading={isLoading}
                   onDelete={() => setPrompts(prompts.filter((_, i) => i !== idx))}
                   prompt={prompt}
@@ -90,7 +91,13 @@ export const ProductCardPage = () => {
               >
                 Добавить промпт
               </Button>
-              <Button size="l" view="action" loading={isLoading} onClick={regenerateDescription}>
+              <Button
+                size="l"
+                view="action"
+                loading={isLoading}
+                onClick={regenerateDescription}
+                disabled={!activeProduct}
+              >
                 Перегенерировать описание
               </Button>
             </Stack>
