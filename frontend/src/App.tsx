@@ -1,32 +1,33 @@
 import { ThemeProvider } from '@gravity-ui/uikit';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Header } from '@/shared/ui';
 
 import {
   FillProductDescriptionPage,
-  UploadProductInfoPage,
+  SearchProductPage,
   FoundProductsPage,
   SimilarProductsPage,
   ProductCardPage,
   FillProductCardDetails,
-} from './pages';
-import { AppContextProvider } from './context/AppContext';
+  AddProductPage,
+} from '@/pages';
+import { AppContextProvider } from '@/context/AppContext';
 
 import './App.css';
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
-
-    element: <UploadProductInfoPage />,
+    element: <SearchProductPage />,
   },
   {
-    path: '/upload-product-info',
-    element: <UploadProductInfoPage />,
+    path: '/search-product',
+    element: <SearchProductPage />,
   },
   {
     path: '/fill-product-info',
-    element: <FillProductDescriptionPage />,
+    element: <FillProductDescriptionPage product={null} />,
   },
   {
     path: '/found-products',
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
     path: '/show-product-card',
     element: <ProductCardPage />,
   },
-]);
+  {
+    path: '/add-product',
+    element: <AddProductPage />,
+  },
+];
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,9 +63,16 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <AppContextProvider>
-          <RouterProvider router={router} />
-        </AppContextProvider>
+        <BrowserRouter>
+          <AppContextProvider>
+            <Header />
+            <Routes>
+              {routes.map((route) => (
+                <Route path={route.path} element={route.element} key={route.path} />
+              ))}
+            </Routes>
+          </AppContextProvider>
+        </BrowserRouter>
       </ThemeProvider>
     </QueryClientProvider>
   );

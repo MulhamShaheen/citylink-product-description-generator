@@ -1,3 +1,17 @@
+export type ProductCategory = 'laptop' | 'smartphone' | 'monitor' | 'tv';
+
+export type ProductSearchCriteria = 'code' | 'name';
+
+export type SearchProductRequest = {
+  category: ProductCategory;
+  criteria: ProductSearchCriteria;
+  value: string;
+};
+
+export type SearchProductResponse = {
+  ok: boolean;
+};
+
 export type ProductInfo<FieldName extends string, FieldValue extends string> = Record<
   FieldName,
   FieldValue
