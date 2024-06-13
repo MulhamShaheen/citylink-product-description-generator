@@ -1,5 +1,4 @@
 // Сущности
-
 export type ProductCategory = 'laptop' | 'smartphone' | 'monitor' | 'tv';
 
 export type ProductSearchCriteria = 'code' | 'name';
@@ -12,6 +11,18 @@ export type Product = {
 };
 
 export type ProductPrompt = string;
+
+export type ProductInformation = {
+  category: string; // Группа товаров
+  code: string; // Код товара
+  citylink: string; // Ситилинк
+  type: string; // Тип
+  part_number: string; // PartNumber/Артикул Производителя
+  brand: string; // Бренд
+  model: string; // Модель
+  family: string; // Семейство
+  website: string; // Ссылка на сайт поставщика/вендора
+};
 
 // Запросы
 // Поиск продукта
@@ -35,6 +46,16 @@ export type RegenerateProductDescriptionRequest = {
 export type RegenerateProductDescriptionResponse = {
   ok: boolean;
   result: Product; // Продукт с новым описанием
+};
+
+// Добавление продукта
+export type AddProductRequest = {
+  information: ProductInformation;
+};
+
+export type AddProductResponse = {
+  ok: boolean;
+  result: Product;
 };
 
 export type ProductInfo<FieldName extends string, FieldValue extends string> = Record<

@@ -3,15 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Header } from '@/shared/ui';
 
-import {
-  FillProductDescriptionPage,
-  SearchProductPage,
-  FoundProductsPage,
-  SimilarProductsPage,
-  ProductCardPage,
-  FillProductCardDetails,
-  AddProductPage,
-} from '@/pages';
+import { SearchProductPage, FoundProductsPage, ProductCardPage, AddProductPage } from '@/pages';
 import { AppContextProvider } from '@/context/AppContext';
 
 import './App.css';
@@ -26,20 +18,8 @@ const routes = [
     element: <SearchProductPage />,
   },
   {
-    path: '/fill-product-info',
-    element: <FillProductDescriptionPage product={null} />,
-  },
-  {
     path: '/found-products',
     element: <FoundProductsPage />,
-  },
-  {
-    path: '/similar-products',
-    element: <SimilarProductsPage />,
-  },
-  {
-    path: '/fill-product-card-details',
-    element: <FillProductCardDetails />,
   },
   {
     path: '/show-product-card',

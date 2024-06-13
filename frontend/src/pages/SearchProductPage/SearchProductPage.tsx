@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Button, RadioButton, RadioButtonOption, Text, TextInput } from '@gravity-ui/uikit';
+import { Button, Icon, RadioButton, RadioButtonOption, Text, TextInput } from '@gravity-ui/uikit';
 
 import { Group, Stack } from '@/shared/ui';
 import { ProductCategory, ProductSearchCriteria } from '@/api/interactions';
 import { useSearchProduct } from '@/api/hooks/useSearchProduct';
+import { Magnifier } from '@gravity-ui/icons';
 
 const productCategoriesOption: RadioButtonOption<ProductCategory>[] = [
   {
@@ -92,6 +93,7 @@ export const SearchProductPage = () => {
               onClick={onSubmit}
               loading={isLoading}
             >
+              <Icon data={Magnifier} />
               Искать
             </Button>
           </Group>

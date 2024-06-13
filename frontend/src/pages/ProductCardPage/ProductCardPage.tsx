@@ -9,21 +9,23 @@ import { useRegenerateProduct } from '@/api/hooks';
 
 interface PromptProps {
   prompt: string;
+  loading?: boolean;
   onChange: (value: string) => void;
   onDelete: () => void;
 }
 
-const Prompt = ({ onChange, onDelete, prompt }: PromptProps) => {
+const Prompt = ({ onChange, onDelete, prompt, loading = false }: PromptProps) => {
   return (
     <Group>
       <Align>
         <TextArea
           style={{ width: '80%' }}
           size="l"
-          value={prompt}
+          value={loading ? '...' : prompt}
           onChange={(e) => onChange(e.target.value)}
+          disabled={loading}
         />
-        <Button size="l" onClick={onDelete} view="flat-danger">
+        <Button size="l" onClick={onDelete} view="flat-danger" loading={loading}>
           Удалить
         </Button>
       </Align>
@@ -70,6 +72,7 @@ export const ProductCardPage = () => {
             <Stack>
               {prompts.map((prompt, idx) => (
                 <Prompt
+                  loading={isLoading}
                   onDelete={() => setPrompts(prompts.filter((_, i) => i !== idx))}
                   prompt={prompt}
                   onChange={(value) =>

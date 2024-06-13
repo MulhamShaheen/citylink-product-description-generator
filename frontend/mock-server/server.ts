@@ -48,18 +48,11 @@ MacBook Air with M2 from $999 or $83.25/mo. for 12 mo.**`,
       },
     });
   }),
-  http.post('fill-product-details', async () => {
+  http.post('add-product', async () => {
     await delay();
     return HttpResponse.json({
-      status: true,
-      result: {
-        found: true,
-        products: [
-          { title: 'Macbook Air', description: 'Apple MGN63/MGN93/MGND3' },
-          { title: 'Macbook Pro', description: 'Apple MGN63/MGN93/MGND3' },
-          { title: 'Xiaomi Mini', description: 'Apple MGN63/MGN93/MGND3' },
-        ],
-      },
+      ok: true,
+      result: { id: 1, title: 'Macbook Air', description: 'Apple MGN63/MGN93/MGND3' },
     });
   }),
 ];

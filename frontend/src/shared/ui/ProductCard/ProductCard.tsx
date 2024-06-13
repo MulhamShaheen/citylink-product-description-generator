@@ -47,7 +47,7 @@ export const ProductCard = ({ product, showDescription = true, showButton = true
         </Stack>
         {showButton && (
           <div style={{ marginTop: 8 }}>
-            <Button size="l" view="action" onClick={handleClick} width="max">
+            <Button size="l" view="action" onClick={handleClick}>
               Смотреть товар
             </Button>
           </div>

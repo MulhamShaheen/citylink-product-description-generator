@@ -1,9 +1,11 @@
-import { RadioButton, RadioButtonOption, Text } from '@gravity-ui/uikit';
+import { Button, Icon, RadioButton, RadioButtonOption, Text } from '@gravity-ui/uikit';
 
 import { Group } from '../Group/Group';
 
 import styles from './Header.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { House } from '@gravity-ui/icons';
+import { Align } from '../Align/Align';
 
 const options: RadioButtonOption[] = [
   { value: '/', content: 'Искать товар' },
@@ -21,8 +23,17 @@ export const Header = () => {
           justifyContent: 'space-between',
         }}
       >
-        <Text variant="header-1">Wolf From Citylink</Text>
-        <RadioButton size="l" options={options} onUpdate={nav} />
+        <Group>
+          <Button size="l" onClick={() => nav('/')}>
+            <Icon data={House}></Icon>
+          </Button>
+          <RadioButton size="l" options={options} onUpdate={nav} />
+        </Group>
+        <Text variant="body-1">
+          <Align>
+            Powered by <img height={24} src="/assets/logo.png" />
+          </Align>
+        </Text>
       </Group>
     </div>
   );
