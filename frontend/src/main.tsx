@@ -7,13 +7,14 @@ import App from './App.tsx';
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import './index.css';
+import { USE_MOCK } from './env.ts';
 
 configure({
   lang: 'ru',
 });
 
 async function enableMocking() {
-  if (process.env.NODE_ENV !== 'development') {
+  if (!USE_MOCK) {
     return;
   }
 

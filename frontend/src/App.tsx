@@ -1,50 +1,35 @@
 import { ThemeProvider } from '@gravity-ui/uikit';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Header } from '@/shared/ui';
 
-import {
-  FillProductDescriptionPage,
-  UploadProductInfoPage,
-  FoundProductsPage,
-  SimilarProductsPage,
-  ProductCardPage,
-  FillProductCardDetails,
-} from './pages';
-import { AppContextProvider } from './context/AppContext';
+import { SearchProductPage, FoundProductsPage, ProductCardPage, AddProductPage } from '@/pages';
+import { AppContextProvider } from '@/context/AppContext';
 
 import './App.css';
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: '/',
-
-    element: <UploadProductInfoPage />,
+    element: <SearchProductPage />,
   },
   {
-    path: '/upload-product-info',
-    element: <UploadProductInfoPage />,
-  },
-  {
-    path: '/fill-product-info',
-    element: <FillProductDescriptionPage />,
+    path: '/search-product',
+    element: <SearchProductPage />,
   },
   {
     path: '/found-products',
     element: <FoundProductsPage />,
   },
   {
-    path: '/similar-products',
-    element: <SimilarProductsPage />,
-  },
-  {
-    path: '/fill-product-card-details',
-    element: <FillProductCardDetails />,
-  },
-  {
     path: '/show-product-card',
     element: <ProductCardPage />,
   },
-]);
+  {
+    path: '/add-product',
+    element: <AddProductPage />,
+  },
+];
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,9 +43,16 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <AppContextProvider>
-          <RouterProvider router={router} />
-        </AppContextProvider>
+        <BrowserRouter>
+          <AppContextProvider>
+            <Header />
+            <Routes>
+              {routes.map((route) => (
+                <Route path={route.path} element={route.element} key={route.path} />
+              ))}
+            </Routes>
+          </AppContextProvider>
+        </BrowserRouter>
       </ThemeProvider>
     </QueryClientProvider>
   );

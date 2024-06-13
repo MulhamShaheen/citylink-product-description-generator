@@ -6,6 +6,7 @@ services:
       context: .
       args:
         - VITE_API_HOST=${VITE_API_HOST}
+        - VITE_USE_MOCK=${VITE_USE_MOCK}
     ports:
       - 80:8080
     healthcheck:
