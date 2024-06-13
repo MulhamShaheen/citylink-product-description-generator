@@ -66,7 +66,10 @@ export const SearchProductPage = () => {
           <Text variant="header-1">Искать по</Text>
           <RadioButton
             value={criteria}
-            onUpdate={setCriteria}
+            onUpdate={(criteria) => {
+              setCriteria(criteria);
+              setCriteriaValue('');
+            }}
             options={searchFieldOptions}
             size="l"
           />

@@ -8,19 +8,21 @@ export type SearchProductRequest = {
   value: string;
 };
 
+export type Product = {
+  title: string;
+  description: string;
+  src?: string;
+};
+
 export type SearchProductResponse = {
   ok: boolean;
+  result: Product[];
 };
 
 export type ProductInfo<FieldName extends string, FieldValue extends string> = Record<
   FieldName,
   FieldValue
 >;
-
-export type Product = {
-  title: string;
-  description: string;
-};
 
 export type ProductField = { value: string; name: string; id: string };
 
