@@ -32,6 +32,22 @@ MacBook Air with M2 from $999 or $83.25/mo. for 12 mo.**`,
       ],
     });
   }),
+  http.post('regenerate-product', async () => {
+    await delay(3000);
+
+    return HttpResponse.json({
+      ok: true,
+      result: {
+        id: 123,
+        description: `GENERATED 
+Lean. Mean. M3 machine.
+MacBook Air sails through work and play — and the M3 chip brings even greater capabilities to the world’s most popular laptop. With up to 18 hours of battery life,1 you can take the superportable MacBook Air anywhere and blaze through whatever you’re into.
+New MacBook Air with M3 from $1099 or $91.58/mo. for 12 mo.**
+MacBook Air with M2 from $999 or $83.25/mo. for 12 mo.**`,
+        title: 'Macbook Air',
+      },
+    });
+  }),
   http.post('fill-product-details', async () => {
     await delay();
     return HttpResponse.json({

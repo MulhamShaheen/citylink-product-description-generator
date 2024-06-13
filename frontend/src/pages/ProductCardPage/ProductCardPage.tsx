@@ -5,6 +5,7 @@ import { Align, Group, ProductCard, Stack } from '@/shared/ui';
 import { Button, Text, TextArea } from '@gravity-ui/uikit';
 
 import styles from './ProductCardPage.module.scss';
+import { useRegenerateProduct } from '@/api/hooks';
 
 interface PromptProps {
   prompt: string;
@@ -33,7 +34,22 @@ const Prompt = ({ onChange, onDelete, prompt }: PromptProps) => {
 export const ProductCardPage = () => {
   const { activeProduct } = useAppContext();
 
+  const { mutateAsync: regenerateProductDescription, isLoading } = useRegenerateProduct();
+
   const [prompts, setPrompts] = useState<string[]>(['Промпт для описания']);
+
+  const regenerateDescription = () => {
+    if (!activeProduct) {
+      return;
+    }
+
+    setPrompts(['Промпт для описания']);
+
+    regenerateProductDescription({
+      id: activeProduct.id,
+      prompts,
+    });
+  };
 
   return (
     <Stack>
@@ -67,10 +83,11 @@ export const ProductCardPage = () => {
                 size="l"
                 view="normal"
                 onClick={() => setPrompts([...prompts, 'Новый промпт'])}
+                loading={isLoading}
               >
                 Добавить промпт
               </Button>
-              <Button size="l" view="action">
+              <Button size="l" view="action" loading={isLoading} onClick={regenerateDescription}>
                 Перегенерировать описание
               </Button>
             </Stack>

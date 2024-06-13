@@ -1,22 +1,40 @@
+// Сущности
+
 export type ProductCategory = 'laptop' | 'smartphone' | 'monitor' | 'tv';
 
 export type ProductSearchCriteria = 'code' | 'name';
 
+export type Product = {
+  id: number;
+  title: string;
+  description: string;
+  src?: string;
+};
+
+export type ProductPrompt = string;
+
+// Запросы
+// Поиск продукта
 export type SearchProductRequest = {
   category: ProductCategory;
   criteria: ProductSearchCriteria;
   value: string;
 };
 
-export type Product = {
-  title: string;
-  description: string;
-  src?: string;
-};
-
 export type SearchProductResponse = {
   ok: boolean;
   result: Product[];
+};
+
+// Регенерация описания продукта
+export type RegenerateProductDescriptionRequest = {
+  id: number; // ID продукта
+  prompts: ProductPrompt[]; // Массив из промптов
+};
+
+export type RegenerateProductDescriptionResponse = {
+  ok: boolean;
+  result: Product; // Продукт с новым описанием
 };
 
 export type ProductInfo<FieldName extends string, FieldValue extends string> = Record<
